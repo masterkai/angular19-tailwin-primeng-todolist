@@ -1,0 +1,14 @@
+<div class="flex flex-row gap-3 my-3">
+  <div class="card flex justify-center">
+    <input type="text" pInputText [(ngModel)]="title" required />
+  </div>
+  <p-button
+    (click)="addTodo()"
+    label="Add"
+    type="submit"
+    icon="pi pi-plus"
+  ></p-button>
+</div>
+<div *ngIf="addTodoMutation.isPending()">Adding...</div>
+<div *ngIf="addTodoMutation.isError()">Error: {{ addTodoMutation.error()?.message }}</div>
+<div *ngIf="addTodoMutation.isSuccess()">Todo added!</div>

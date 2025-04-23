@@ -1,0 +1,29 @@
+<div *ngIf="todosQuery.isPending()">Loading...</div>
+<div *ngIf="todosQuery.isError()">Error: {{ todosQuery.error()?.message }}</div>
+@if (todosQuery.isSuccess()) {
+  <div class="card rounded-border">
+    <p-table
+      [value]="todosQuery.data() ?? []"
+      [paginator]="true"
+      [rows]="5"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[5, 10, 20]"
+    >
+      <ng-template #header>
+        <tr>
+          <th style="width:25%">userId</th>
+          <th style="width:25%">Title</th>
+          <th style="width:25%">complete</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-customer>
+        <tr>
+          <td>{{ customer.userId }}</td>
+          <td>{{ customer.title }}</td>
+          <td>{{ customer.completed }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+}
+
