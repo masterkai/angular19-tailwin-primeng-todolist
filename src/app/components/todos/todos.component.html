@@ -11,14 +11,12 @@
     >
       <ng-template #header>
         <tr>
-          <th style="width:25%">userId</th>
           <th style="width:25%">Title</th>
           <th style="width:25%">complete</th>
         </tr>
       </ng-template>
       <ng-template #body let-customer>
         <tr>
-          <td>{{ customer.userId }}</td>
           <td>{{ customer.title }}</td>
           <td>{{ customer.completed }}</td>
         </tr>
