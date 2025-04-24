@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
-import { TodoService } from '../../todo.service';
+import {Todo, TodoService} from '../../todo.service';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Button } from 'primeng/button';
@@ -26,12 +26,24 @@ export class AddTodoComponent {
 
   title = '';
 
-  addTodoMutation = injectMutation(() => ({
-    mutationFn: (newTitle: string) =>
-      this.todoService.addTodo({ title: newTitle, isComplete: false, id: uuidv4() }),
-    onSuccess: () => {
-      this.queryClient.invalidateQueries({ queryKey: ['todos'] });
+  addTodoMutation = injectMutation<Todo,Error,Todo, AddTodoContext>(() => ({
+    mutationFn: (todo: Todo) =>
+      this.todoService.addTodo(todo),
+    onMutate: (newTodo) => {
+      const loadingNewTodo = { ...newTodo, title: 'loading...' };
+      const previousTodos = this.queryClient.getQueryData<Todo[]>(['todos'])|| [];
+      this.queryClient.setQueryData<Todo[]>(['todos'], (old: Todo[] | undefined) => {
+        return [loadingNewTodo,...(old ?? [])];
+      });
       this.title = '';
+      return { previousTodos };
+    },
+    onSuccess: ( savedTodo, newTodo ) => {
+      this.queryClient.setQueryData<Todo[]>(['todos'], (old: Todo[] | undefined) => {
+        return old?.map(todo => todo.id === newTodo.id ? savedTodo : todo);
+      });
+      // this.queryClient.invalidateQueries({ queryKey: ['todos'] });
+      // this.title = '';
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
@@ -39,11 +51,27 @@ export class AddTodoComponent {
         life: 3000,
       });
     },
+    onError: (error, newTodo, context) => {
+      if (!context) {
+        return;
+      }
+      this.queryClient.setQueryData<Todo[]>(['todos'], context?.previousTodos);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error: ' + error.message,
+        detail: 'Failed to add todo',
+        life: 3000,
+      });
+    },
   }));
 
   addTodo() {
     if (this.title.trim()) {
-      this.addTodoMutation.mutate(this.title);
+      this.addTodoMutation.mutate({ title: this.title, isComplete: false, id: uuidv4(), createdAt: new Date().toISOString() });
     }
   }
+}
+
+interface AddTodoContext {
+  previousTodos: Todo[];
 }
