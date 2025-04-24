@@ -11,14 +11,19 @@
     >
       <ng-template #header>
         <tr>
-          <th style="width:25%">Title</th>
-          <th style="width:25%">complete</th>
+          <th style="width:50%">Title</th>
+          <th style="width:50%">
+            <div class="grid place-items-center">complete</div>
+          </th>
         </tr>
       </ng-template>
       <ng-template #body let-todo>
         <tr>
           <td><div class="line-clamp-1">{{ todo.title }}</div></td>
-          <td>{{ todo.isComplete }}</td>
+          <td>
+            <div class="grid place-items-center">
+              <p-toggleswitch [(ngModel)]="todo.isComplete" (onChange)="updateTodoMutation.mutate(todo)" />
+            </div></td>
         </tr>
       </ng-template>
     </p-table>

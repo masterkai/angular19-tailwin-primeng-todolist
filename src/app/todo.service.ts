@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { environment } from '../environments/environment.development';
 
 export interface Todo {
   id: string;
@@ -28,5 +27,11 @@ export class TodoService {
   addTodo(todo: Partial<Todo>) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return lastValueFrom(this.http.post<Todo>(this.baseUrl+"/TodoItems", todo, { headers }));
+  }
+
+  updateTodo(todo: Todo) {
+    const updatedTodo = { ...todo, createdAt: new Date().toISOString(), isComplete: todo.isComplete };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return lastValueFrom(this.http.put<Todo>(this.baseUrl+"/TodoItems/"+todo.id, updatedTodo, { headers }));
   }
 }
