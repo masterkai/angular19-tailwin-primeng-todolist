@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-todo',
@@ -27,7 +28,7 @@ export class AddTodoComponent {
 
   addTodoMutation = injectMutation(() => ({
     mutationFn: (newTitle: string) =>
-      this.todoService.addTodo({ title: newTitle, completed: false, userId: 1 }),
+      this.todoService.addTodo({ title: newTitle, isComplete: false, id: uuidv4() }),
     onSuccess: () => {
       this.queryClient.invalidateQueries({ queryKey: ['todos'] });
       this.title = '';

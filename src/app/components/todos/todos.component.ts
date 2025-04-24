@@ -8,7 +8,6 @@ import { TableModule } from 'primeng/table';
   selector: 'app-todos',
   imports: [
     NgIf,
-    NgForOf,
     TableModule
   ],
   templateUrl: './todos.component.html',

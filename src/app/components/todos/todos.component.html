@@ -15,10 +15,10 @@
           <th style="width:25%">complete</th>
         </tr>
       </ng-template>
-      <ng-template #body let-customer>
+      <ng-template #body let-todo>
         <tr>
-          <td>{{ customer.title }}</td>
-          <td>{{ customer.completed }}</td>
+          <td>{{ todo.title }}</td>
+          <td>{{ todo.isComplete }}</td>
         </tr>
       </ng-template>
     </p-table>
