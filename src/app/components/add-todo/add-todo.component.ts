@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
     InputText
   ],
   templateUrl: './add-todo.component.html',
+  standalone: true,
   styleUrl: './add-todo.component.css'
 })
 export class AddTodoComponent {

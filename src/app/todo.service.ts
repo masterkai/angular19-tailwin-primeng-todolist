@@ -7,6 +7,7 @@ export interface Todo {
   title: string;
   isComplete: boolean;
   createdAt: string;
+  isEditing?: boolean;
 }
 
 @Injectable({
@@ -30,8 +31,8 @@ export class TodoService {
   }
 
   updateTodo(todo: Todo) {
-    const updatedTodo = { ...todo, createdAt: new Date().toISOString(), isComplete: todo.isComplete };
+    // const updatedTodo = { ...todo, createdAt: new Date().toISOString(), isComplete: todo.isComplete };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return lastValueFrom(this.http.put<Todo>(this.baseUrl+"/TodoItems/"+todo.id, updatedTodo, { headers }));
+    return lastValueFrom(this.http.put<Todo>(this.baseUrl+"/TodoItems/"+todo.id, todo, { headers }));
   }
 }
