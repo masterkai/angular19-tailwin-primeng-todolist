@@ -13,8 +13,9 @@ import { Toast } from 'primeng/toast';
     Toast
   ],
   templateUrl: './app.component.html',
+  standalone: true,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular19-tailwind';
+  title = 'Angular19-tailwind-prime-ng TanStack Query Todo App';
 }
