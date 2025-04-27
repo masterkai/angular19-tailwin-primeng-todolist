@@ -37,11 +37,16 @@
                 </div>
               </div>
             } @else {
-              <div
-                (click)="todo.isEditing = true"
-                class="line-clamp-1">
-                {{ todo.title }}
-              </div>
+              @if (todo.title === 'loading...') {
+                <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px" />
+              } @else {
+                <div
+                  (click)="todo.isEditing = true"
+                  class="line-clamp-1">
+                  {{ todo.title }}
+                </div>
+              }
+
             }
           </td>
           <td>

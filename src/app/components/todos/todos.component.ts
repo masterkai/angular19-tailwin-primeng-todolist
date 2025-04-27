@@ -1,13 +1,14 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Todo, TodoService} from '../../todo.service';
 import {injectMutation, injectQuery, QueryClient} from '@tanstack/angular-query-experimental';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {Button} from 'primeng/button';
 import {InputText} from 'primeng/inputtext';
+import {Skeleton} from 'primeng/skeleton';
 
 @Component({
   selector: 'app-todos',
@@ -17,7 +18,8 @@ import {InputText} from 'primeng/inputtext';
     ToggleSwitch,
     FormsModule,
     Button,
-    InputText
+    InputText,
+    Skeleton
   ],
   templateUrl: './todos.component.html',
   standalone: true,

@@ -21,7 +21,6 @@ export class TodoService {
   getTodos() {
     // const headers = { 'Content-Type': 'application/json' };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    // return lastValueFrom(this.http.get<Todo[]>(this.baseUrl + '/TodoItems', { headers }));
     return lastValueFrom(this.http.get<Todo[]>(this.baseUrl+"/TodoItems", { headers }));
   }
 
