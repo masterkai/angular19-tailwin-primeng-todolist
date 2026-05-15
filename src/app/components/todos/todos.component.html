@@ -38,7 +38,7 @@
               </div>
             } @else {
               @if (todo.title === 'loading...') {
-                <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px" />
+                <p-skeleton width="100%" styleClass="mb-2" borderRadius="16px" />
               } @else {
                 <div
                   (click)="todo.isEditing = true"
