@@ -2,14 +2,15 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   provideTanStackQuery,
-  QueryClient, withDevtools,
+  QueryClient,
 } from '@tanstack/angular-query-experimental'
+import { withDevtools } from '@tanstack/angular-query-experimental/devtools';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
+import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
