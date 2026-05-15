@@ -1,5 +1,9 @@
-<div *ngIf="todosQuery.isPending()">Loading...</div>
-<div *ngIf="todosQuery.isError()">Error: {{ todosQuery.error()?.message }}</div>
+@if (todosQuery.isPending()) {
+  <div>Loading...</div>
+}
+@if (todosQuery.isError()) {
+  <div>Error: {{ todosQuery.error().message }}</div>
+}
 @if (todosQuery.isSuccess()) {
   <div class="card rounded-border">
     <p-table
@@ -62,4 +66,3 @@
     </p-table>
   </div>
 }
-

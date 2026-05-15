@@ -1,7 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Todo, TodoService} from '../../todo.service';
 import {injectMutation, injectQuery, QueryClient} from '@tanstack/angular-query-experimental';
-import { NgIf } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {FormsModule} from '@angular/forms';
@@ -13,7 +12,6 @@ import {Skeleton} from 'primeng/skeleton';
 @Component({
   selector: 'app-todos',
   imports: [
-    NgIf,
     TableModule,
     ToggleSwitch,
     FormsModule,

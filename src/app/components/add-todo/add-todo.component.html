@@ -9,6 +9,12 @@
     icon="pi pi-plus"
   ></p-button>
 </div>
-<div *ngIf="addTodoMutation.isPending()">Adding...</div>
-<div *ngIf="addTodoMutation.isError()">Error: {{ addTodoMutation.error()?.message }}</div>
-<div *ngIf="addTodoMutation.isSuccess()">Todo added!</div>
+@if (addTodoMutation.isPending()) {
+  <div>Adding...</div>
+}
+@if (addTodoMutation.isError()) {
+  <div>Error: {{ addTodoMutation.error().message }}</div>
+}
+@if (addTodoMutation.isSuccess()) {
+  <div>Todo added!</div>
+}

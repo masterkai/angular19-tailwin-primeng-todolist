@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
 import {Todo, TodoService} from '../../todo.service';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
@@ -12,7 +11,6 @@ import { v4 as uuidv4 } from 'uuid';
   selector: 'app-add-todo',
   imports: [
     FormsModule,
-    NgIf,
     Button,
     InputText
   ],
