@@ -46,7 +46,8 @@
               } @else {
                 <div
                   (click)="todo.isEditing = true"
-                  class="line-clamp-1">
+                  class="line-clamp-1"
+                  [class.line-through]="todo.isComplete">
                   {{ todo.title }}
                 </div>
               }
